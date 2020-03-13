@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="messages">Latest message</div>
+
+<script>
+    let source = new EventSource("/source");
+
+    source.onmessage = function (ev) {
+        console.log(ev.data)
+        document.getElementById("messages").innerHTML = ev.data
+    }
+</script>
+
+
+<div>Latest message from flux:
+    <span id="fluxMessages"></span>
+</div>
+<script>
+    let fluxSource = new EventSource("/fluxSource");
+    fluxSource.onmessage = ev => {
+        console.log(ev.data)
+        document.getElementById("fluxMessages").innerHTML = ev.data
+    }
+
+</script>
+
+</body>
+</html>
